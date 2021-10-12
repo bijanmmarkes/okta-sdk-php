@@ -153,6 +153,16 @@ To start at the second entry and get the next two items:
 $users = (new \Okta\Okta)->getUsers(['query' => ['limit' => 2, 'after' => 2]]);
 ```
 
+## Groups
+### Finding a group by id
+
+```php
+$group = new \Okta\Groups\Group();
+$foundGroup = $group->get('00g16A52ywfMEDe2G5g1');
+var_dump($foundGroup);
+```
+
+
 ## Caching
 The Okta PHP SDK allows any resource with a self link to be cached by default. The SDK uses any PSR-6
 caching adaptor that you would like to use. By default, we ship with the
