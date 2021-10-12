@@ -19,5 +19,14 @@ namespace Okta\Groups;
 
 class Group extends \Okta\Generated\Groups\Group
 {
+    public function convertFromGenericGroup()
+    {
+        $groupClass = \Okta\Groups\Group::class;
+        $properties = new \stdClass();
+        foreach ($this->getPropertyNames() as $name) {
+            $properties->$name = $this->getProperty($name);
+        }
 
+        return new $groupClass(null, $properties);
+    }
 }
