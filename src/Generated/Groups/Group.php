@@ -31,6 +31,22 @@ class Group extends \Okta\Resource\AbstractResource
     const OBJECT_CLASS = 'objectClass';
     const LAST_MEMBERSHIP_UPDATED = 'lastMembershipUpdated';
 
+    /**
+     * @param $query
+     * @return \Okta\Groups\Group
+     */
+    public function get($query)
+    {
+        /** @var $group \Okta\Groups\Group */
+        $group = \Okta\Client::getInstance()
+            ->getDataStore()
+            ->getResource(
+                $query,
+                \Okta\Groups\Group::class,
+                "/groups"
+            );
+        return $group->convertFromGenericGroup();
+    }
 
 
     public function save()
@@ -53,7 +69,7 @@ class Group extends \Okta\Resource\AbstractResource
                     $this
                 );
     }
-        
+
     /**
      * Get the id.
      *
@@ -121,7 +137,7 @@ class Group extends \Okta\Resource\AbstractResource
             self::PROFILE,
             $profile
         );
-        
+
         return $this;
     }
 
