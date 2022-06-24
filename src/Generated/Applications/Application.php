@@ -512,8 +512,28 @@ class Application extends \Okta\Resource\AbstractResource
 
         return new \Okta\Applications\ApplicationGroupAssignment(null, $body);
     }
+    
+    
+    /**
+    * Removes a group assignment from an application.
+    * https://developer.okta.com/docs/reference/api/apps/#remove-group-from-application
+    *
+    * @return mixed|null
+    */
+    public function deleteApplicationGroupAssignment($groupId)
+    {
+        $uri = "/api/v1/apps/{$this->getId()}/groups/{$groupId}";
+        $uri = $this->getDataStore()->buildUri(
+            $this->getDataStore()->getOrganizationUrl() . $uri
+        );
+        $body = $this
+                ->getDataStore()
+                ->executeRequest('DELETE', $uri);
 
-
+        return new \Okta\Applications\ApplicationGroupAssignment(null, $body);
+    }
+    
+    
     /**
     * Clones a X.509 certificate for an application key credential from a source application to target application.
     *
